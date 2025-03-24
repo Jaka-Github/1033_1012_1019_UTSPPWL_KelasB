@@ -19,7 +19,6 @@
                         <th scope="col">Publisher</th>
                         <th scope="col">Year</th>
                         <th scope="col">Stock</th>
-                        <th scope="col">Description</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -32,7 +31,6 @@
                             <td>{{ $book->publisher }}</td>
                             <td>{{ $book->year }}</td>
                             <td>{{ $book->stock }}</td>
-                            <td>{{ Str::limit($book->description, 50) }}</td> 
                             <td>
                                 <form action="{{ route('books.destroy', $book->id) }}" method="post">
                                     @csrf
@@ -59,9 +57,9 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8">
+                            <td colspan="7">
                                 <span class="text-danger">
-                                    <strong>No Book Found!</strong>
+                                    <strong>Book Not Found!</strong>
                                 </span>
                             </td>
                         </tr>
