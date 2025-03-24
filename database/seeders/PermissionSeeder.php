@@ -23,9 +23,9 @@ class PermissionSeeder extends Seeder
             'create-user',
             'edit-user',
             'delete-user',
-            'create-product',
-            'edit-product',
-            'delete-product'
+            'create-book',
+            'edit-book',
+            'delete-book'
         ];
         // Looping and Inserting Array's Permissions into Permission Table
         foreach ($permissions as $permission) {
