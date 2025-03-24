@@ -25,14 +25,14 @@ class RoleSeeder extends Seeder
             'create-user',
             'edit-user',
             'delete-user',
-            'create-product',
-            'edit-product',
-            'delete-product'
+            'create-book',
+            'edit-book',
+            'delete-book'
         ]);
         $Operator->givePermissionTo([
-            'create-product',
-            'edit-product',
-            'delete-product'
+            'create-book',
+            'edit-book',
+            'delete-book'
         ]);
     }
 }
