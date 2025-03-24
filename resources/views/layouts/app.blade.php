@@ -64,8 +64,8 @@
                             @endcanany
 
 
-                            @canany(['create-product', 'edit-product', 'delete-product'])
-                                <li><a class="nav-link" href="{{ route('products.index') }}">Manage Products</a></li>
+                            @canany(['create-book', 'edit-book', 'delete-book'])
+                                <li><a class="nav-link" href="{{ route('books.index') }}">Manage Books</a></li>
                             @endcanany
 
 

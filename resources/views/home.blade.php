@@ -35,13 +35,13 @@
 
 
                         @canany([
-                            'create-product',
-                            'edit-product',
+                            'create-book',
+                            'edit-book',
                             'delete-
-                            product',
+                            book',
                             ])
-                            <a class="btn btn-warning" href="{{ route('products.index') }}">
-                                <i class="bi bi-bag"></i> Manage Products</a>
+                            <a class="btn btn-warning" href="{{ route('books.index') }}">
+                                <i class="bi bi-bag"></i> Manage Books</a>
                         @endcanany
                         <p>&nbsp;</p>
                     </div>
