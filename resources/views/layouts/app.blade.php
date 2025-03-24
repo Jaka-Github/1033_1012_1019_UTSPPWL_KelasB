@@ -22,7 +22,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('home') }}">
-                    Role Management
+                    Mantaka
                 </a>
 
 
@@ -55,17 +55,17 @@
                             @endif
                         @else
                             @canany(['create-role', 'edit-role', 'delete-role'])
-                                <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Roles</a></li>
+                                <li><a class="nav-link" href="{{ route('roles.index') }}">Kelola Roles</a></li>
                             @endcanany
 
 
                             @canany(['create-user', 'edit-user', 'delete-user'])
-                                <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
+                                <li><a class="nav-link" href="{{ route('users.index') }}">Kelola Users</a></li>
                             @endcanany
 
 
                             @canany(['create-book', 'edit-book', 'delete-book'])
-                                <li><a class="nav-link" href="{{ route('books.index') }}">Manage Books</a></li>
+                                <li><a class="nav-link" href="{{ route('books.index') }}">Kelola Buku</a></li>
                             @endcanany
 
 
@@ -102,17 +102,30 @@
                                 {{ $message }}
                             </div>
                         @endif
-                        <h3 class="text-center mt-3 mb-3">User Roles and Permissions </h3>
+                        <!-- Dynamic Title -->
+                        <h3 class="text-center mt-3 mb-3">
+                            @section('page-title')
+                                @if(Route::currentRouteName() == 'books.index')
+                                    Kelola Buku
+                                @elseif(Route::currentRouteName() == 'roles.index')
+                                    Kelola Roles
+                                @elseif(Route::currentRouteName() == 'users.index')
+                                    Kelola Users
+                                @else
+                                    User Roles and Permissions
+                                @endif
+                            @show
+                        </h3>
+
                         @yield('content')
+                        
                         <div class="row justify-content-center text-center mt-3">
                             <div class="col-md-12">
                                 <p>Back to Page:
                                     <a href="{{ url('/') }}"><strong>Halaman Utama</strong></a>
                                 </p>
                                 <p>
-
-
-                                    @copyright <a href="#"><strong>LEBAH GANTENG</strong></a>
+                                    @copyright <a href="#"><strong>Mantaka</strong></a>
                                 </p>
                             </div>
                         </div>
