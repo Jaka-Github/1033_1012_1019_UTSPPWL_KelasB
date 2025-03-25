@@ -25,11 +25,13 @@ class PermissionSeeder extends Seeder
             'delete-user',
             'create-book',
             'edit-book',
-            'delete-book'
+            'delete-book',
+            'view-book',
+            'borrow-book',
         ];
         // Looping and Inserting Array's Permissions into Permission Table
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::firstOrCreate(['name' => $permission]);
         }
     }
 }

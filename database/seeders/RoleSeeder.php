@@ -18,9 +18,10 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::create(['name' => 'Super Admin']);
-        $admin = Role::create(['name' => 'Admin']);
-        $Operator = Role::create(['name' => 'Operator']);
+        Role::firstOrCreate(['name' => 'Super Admin']);
+        $admin = Role::firstOrCreate(['name' => 'Admin']);
+        $Operator = Role::firstOrCreate(['name' => 'Operator']);
+        $user = Role::firstOrCreate(['name' => 'User']);
         $admin->givePermissionTo([
             'create-user',
             'edit-user',
@@ -34,5 +35,12 @@ class RoleSeeder extends Seeder
             'edit-book',
             'delete-book'
         ]);
+
+        $user->givePermissionTo([
+            'view-book',
+            'borrow-book'
+        ]);
+
+        
     }
 }

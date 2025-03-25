@@ -45,11 +45,23 @@ class UserController extends Controller
     {
         $input = $request->all();
         $input['password'] = Hash::make($request->password);
+    
+        // Membuat pengguna baru
         $user = User::create($input);
+    
+        // Menetapkan role dan permissions
         $user->assignRole($request->roles);
+        
+        // Menambahkan permissions langsung ke pengguna jika diperlukan
+        if ($request->roles == 'viewer') {
+            $user->givePermissionTo('view-books');
+            $user->givePermissionTo('borrow-books');
+        }
+    
         return redirect()->route('users.index')
             ->withSuccess('New user is added successfully.');
     }
+    
     /**
      * Display the specified resource.
      */
