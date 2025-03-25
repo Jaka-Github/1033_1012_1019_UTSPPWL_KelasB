@@ -46,12 +46,27 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request): RedirectResponse
     {
+        // Membuat role baru
         $role = Role::create(['name' => $request->name]);
+    
+        // Menambahkan permissions yang ada
         $permissions = Permission::whereIn('id', $request->permissions)->get(['name'])->toArray();
+        
+        // Menambahkan permissions 'view-books' dan 'borrow-books' jika belum ada
+        if (!in_array('view-books', $permissions)) {
+            $permissions[] = 'view-books';
+        }
+        if (!in_array('borrow-books', $permissions)) {
+            $permissions[] = 'borrow-books';
+        }
+    
+        // Menyinkronkan permissions dengan role
         $role->syncPermissions($permissions);
+    
         return redirect()->route('roles.index')
             ->withSuccess('New role is added successfully.');
     }
+    
     /**
      * Display the specified resource.
      */
@@ -90,11 +105,23 @@ class RoleController extends Controller
     {
         $input = $request->only('name');
         $role->update($input);
+        
+        // Menambahkan permissions 'view-books' dan 'borrow-books' jika belum ada
         $permissions = Permission::whereIn('id', $request->permissions)->get(['name'])->toArray();
+        if (!in_array('view-books', $permissions)) {
+            $permissions[] = 'view-books';
+        }
+        if (!in_array('borrow-books', $permissions)) {
+            $permissions[] = 'borrow-books';
+        }
+    
+        // Menyinkronkan permissions dengan role
         $role->syncPermissions($permissions);
+    
         return redirect()->back()
             ->withSuccess('Role is updated successfully.');
     }
+    
     /**
      * Remove the specified resource from storage.
      */
