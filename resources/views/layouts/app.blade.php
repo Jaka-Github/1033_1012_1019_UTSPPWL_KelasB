@@ -111,8 +111,7 @@
                                     Kelola Roles
                                 @elseif(Route::currentRouteName() == 'users.index')
                                     Kelola Users
-                                @else
-                                    User Roles and Permissions
+                            
                                 @endif
                             @show
                         </h3>
