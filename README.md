@@ -21,19 +21,19 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 ## Database 
 
-For testing, here is the database :
-**DB_CONNECTION=mysql
-**DB_HOST=127.0.0.1
-**DB_PORT=3306
-**DB_DATABASE=mantaka
-**DB_USERNAME=root
-**DB_PASSWORD=
+For testing, here is the database :<br>
+DB_CONNECTION=mysql<br>
+DB_HOST=127.0.0.1<br>
+DB_PORT=3306<br>
+DB_DATABASE=mantaka<br>
+DB_USERNAME=root<br>
+DB_PASSWORD=<br>
 
 ## User Login and Register
 
-We already made user account example for testing. Here is the User account for access "peminjaman buku" feature. This account can be used for it
-**email : userexample@gmail.com
-**password : 12345678 
+We already made user account example for testing. Here is the User account for access "peminjaman buku" feature. This account can be used for it<br>
+email : userexample@gmail.com<br>
+password : 12345678<br>
 
 ## Security Vulnerabilities
 
