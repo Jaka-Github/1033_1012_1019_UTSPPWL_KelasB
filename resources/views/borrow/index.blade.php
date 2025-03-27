@@ -6,29 +6,55 @@
     body {
         background-color: #f0f0f0; /* Ganti warna sesuai keinginan */
     }
+    .section-header {
+        position: relative;
+        overflow: hidden;
+        color: black;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: bolder;
+    }
+    .section-header-borrow {
+        background: white;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .section-header-borrowed {
+        background: white;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .section-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255,255,255,0.1);
+        transform: skewX(-15deg);
+    }
 </style>
 @php
     use Carbon\Carbon;
 @endphp
 <div class="container">
     
-    <h2 class="mb-4">Borrow a Book</h2>
+    <h2 class="mb-4 py-4 px-3 text-center rounded section-header section-header-borrow">Borrow a Book</h2>
 
     <!-- Menampilkan buku yang bisa dipinjam -->
-    <div class="row g-4"> <!-- Spacing lebih baik -->
+    <div class="row g-4 "> <!-- Spacing lebih baik -->
         @foreach ($books as $book)
         <div class="col-md-3">
             <div class="card shadow-sm p-3"> <!-- Tambahkan bayangan -->
-                <div class="card-body">
+                <div class="card-body text-center">
                     <h5 class="card-title">{{ $book->title }}</h5>
-                    <p class="card-text">Author: {{ $book->author }}</p>
+                    <p class="card-text">By {{ $book->author }}</p>
                     <p class="card-text">Publisher: {{ $book->publisher }}</p>
                     <p class="card-text"><strong>Stock: {{ $book->stock }}</strong></p>
 
                     @if($book->stock > 0)
                     <button type="button" class="btn btn-primary w-100" 
                         data-bs-toggle="modal" 
-                        data-bs-target="#borrowModal"
+                        data-bs-target="#borrowModal" 
                         data-book-id="{{ $book->id }}">
                         Borrow
                     </button>
@@ -42,19 +68,28 @@
     </div>
 
     <!-- Jarak antara bagian peminjaman dan daftar buku yang dipinjam -->
-    <hr class="my-5">
+    <br>
+    <br>
+    <br>
+    <br>
 
-    <h2 class="mb-4">Your Borrowed Books</h2>
+    
+    <br>
+    <br>
+    <br>
+    <h2 class="mb-4 py-4 px-3 text-center rounded section-header section-header-borrowed">Your Borrowed Books</h2>
     <div class="row g-4">
         @foreach ($borrows as $borrow)
         <div class="col-md-3">
             <div class="card shadow-sm p-3"> <!-- Tambahkan bayangan -->
-                <div class="card-body">
+                <div class="card-body text-center">
                     <h5 class="card-title">{{ $borrow->book->title }}</h5>
-                    <p class="card-text">Author: {{ $borrow->book->author }}</p>
+                    <p class="card-text">By {{ $borrow->book->author }}</p>
                     <p class="card-text">Borrow Date: {{ \Carbon\Carbon::parse($borrow->borrow_date)->translatedFormat('d F Y') }}</p>
                     <p class="card-text">Return Date: {{ \Carbon\Carbon::parse($borrow->return_date)->translatedFormat('d F Y') }}</p>
-                    <p class="card-text"><strong>Status: {{ ucfirst($borrow->status) }}</strong></p>
+                    <p class="card-text"><span class="badge bg-{{ $borrow->status == 'borrowed' ? 'warning' : 'success' }}">
+                    {{ ucfirst($borrow->status) }}
+                    </span></p>
 
                     @if($borrow->status == 'borrowed')
                     <form action="{{ route('borrow.return', $borrow->id) }}" method="POST">
