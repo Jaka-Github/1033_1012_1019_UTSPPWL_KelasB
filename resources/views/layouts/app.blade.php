@@ -16,6 +16,20 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+            let alert = document.querySelector(".alert"); // Pilih elemen notifikasi
+
+            if (alert) {
+                alert.style.transition = "opacity 0.5s";
+                alert.style.opacity = "0"; // Buat transparan
+
+                setTimeout(() => alert.remove(), 500); // Hapus setelah animasi selesai
+            }
+        }, 3000); // Timeout 3 detik
+    });
+</script>
 
 <body>
     <div id="app">
