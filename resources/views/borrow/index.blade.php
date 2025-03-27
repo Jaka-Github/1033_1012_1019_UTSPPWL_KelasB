@@ -1,11 +1,15 @@
 @extends('layouts.app')
 
+
 @section('content')
 <style>
     body {
         background-color: #f0f0f0; /* Ganti warna sesuai keinginan */
     }
 </style>
+@php
+    use Carbon\Carbon;
+@endphp
 <div class="container">
     
     <h2 class="mb-4">Borrow a Book</h2>
@@ -48,8 +52,8 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $borrow->book->title }}</h5>
                     <p class="card-text">Author: {{ $borrow->book->author }}</p>
-                    <p class="card-text">Borrow Date: {{ $borrow->borrow_date }}</p>
-                    <p class="card-text">Return Date: {{ $borrow->return_date }}</p>
+                    <p class="card-text">Borrow Date: {{ \Carbon\Carbon::parse($borrow->borrow_date)->translatedFormat('d F Y') }}</p>
+                    <p class="card-text">Return Date: {{ \Carbon\Carbon::parse($borrow->return_date)->translatedFormat('d F Y') }}</p>
                     <p class="card-text"><strong>Status: {{ ucfirst($borrow->status) }}</strong></p>
 
                     @if($borrow->status == 'borrowed')
