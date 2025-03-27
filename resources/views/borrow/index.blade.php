@@ -49,6 +49,7 @@
                     <h5 class="card-title">{{ $borrow->book->title }}</h5>
                     <p class="card-text">Author: {{ $borrow->book->author }}</p>
                     <p class="card-text">Borrow Date: {{ $borrow->borrow_date }}</p>
+                    <p class="card-text">Return Date: {{ $borrow->return_date }}</p>
                     <p class="card-text"><strong>Status: {{ ucfirst($borrow->status) }}</strong></p>
 
                     @if($borrow->status == 'borrowed')

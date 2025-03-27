@@ -33,7 +33,10 @@ class BorrowController extends Controller
         }
 
         // Update status
-        $borrow->update(['status' => 'returned']);
+        $borrow->update([
+        'status' => 'returned',
+        'return_date' => now(),
+        ]);
 
         // Kembalikan stok buku
         $book = Book::findOrFail($borrow->book_id);
@@ -47,6 +50,7 @@ class BorrowController extends Controller
     {
         $request->validate([
             'book_id' => 'required|exists:books,id',
+            'return_date' => 'nullable|date|after_or_equal:today',
         ]);
 
         $book = Book::findOrFail($request->book_id);
@@ -59,6 +63,7 @@ class BorrowController extends Controller
             'user_id' => Auth::id(),
             'book_id' => $book->id,
             'borrow_date' => now(),
+            'return_date' => $request->return_date,
             'status' => 'borrowed',
         ]);
 
